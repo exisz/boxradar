@@ -133,8 +133,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-8 px-4 mt-16">
-        <div className="max-w-5xl mx-auto text-center text-sm">
+        <div className="max-w-5xl mx-auto text-center text-sm space-y-2">
           <p>© {new Date().getFullYear()} BoxRadar. Compare subscription boxes with confidence.</p>
+          <p>A <a href="https://rollersoft.com.au" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300">Rollersoft</a> project.</p>
         </div>
       </footer>
     </main>

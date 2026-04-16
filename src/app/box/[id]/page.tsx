@@ -77,14 +77,26 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
 
           <p className="text-gray-700 text-lg mb-6">{box.description}</p>
 
-          <a
-            href={box.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition"
-          >
-            Visit {box.name} →
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={box.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition"
+            >
+              Visit {box.name} →
+            </a>
+            {process.env.NEXT_PUBLIC_AMAZON_AU_TAG && (
+              <a
+                href={`https://www.amazon.com.au/s?k=${encodeURIComponent(box.name + " subscription box")}&tag=${process.env.NEXT_PUBLIC_AMAZON_AU_TAG}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-amber-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-amber-600 transition"
+              >
+                🛒 Find on Amazon AU
+              </a>
+            )}
+          </div>
         </div>
 
         {similar.length > 0 && (
@@ -104,8 +116,9 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
       </div>
 
       <footer className="bg-gray-900 text-gray-400 py-8 px-4 mt-16">
-        <div className="max-w-5xl mx-auto text-center text-sm">
+        <div className="max-w-5xl mx-auto text-center text-sm space-y-2">
           <p>© {new Date().getFullYear()} BoxRadar. Compare subscription boxes with confidence.</p>
+          <p>A <a href="https://rollersoft.com.au" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300">Rollersoft</a> project.</p>
         </div>
       </footer>
     </main>
