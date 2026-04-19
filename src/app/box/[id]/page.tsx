@@ -58,11 +58,14 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
       <div className="max-w-4xl mx-auto px-4 -mt-8">
         <div className="bg-white rounded-xl shadow-sm border p-8">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{box.name}</h1>
-              <div className="flex gap-2">
-                <span className="text-sm bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full">{box.category}</span>
-                <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{box.frequency}</span>
+            <div className="flex items-start gap-4">
+              {(() => { try { const d = new URL(box.url).hostname; return <img src={`https://www.google.com/s2/favicons?domain=${d}&sz=128`} alt={`${box.name} logo`} width={64} height={64} className="w-16 h-16 rounded-xl border bg-white" />; } catch { return null; } })()}
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{box.name}</h1>
+                <div className="flex gap-2">
+                  <span className="text-sm bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full">{box.category}</span>
+                  <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{box.frequency}</span>
+                </div>
               </div>
             </div>
             <div className="text-right">

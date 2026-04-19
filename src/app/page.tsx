@@ -103,15 +103,23 @@ export default function Home() {
         <p className="text-sm text-gray-500 mb-4">{filtered.length} boxes found</p>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((box) => (
+          {filtered.map((box) => {
+            const domain = (() => { try { return new URL(box.url).hostname; } catch { return ""; } })();
+            const logo = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=128` : "";
+            return (
             <Link
               key={box.id}
               href={`/box/${box.id}`}
               className="bg-white rounded-xl shadow-sm border p-5 hover:shadow-md transition block"
             >
-              <div className="flex justify-between items-start mb-2">
-                <h2 className="text-lg font-semibold text-gray-900">{box.name}</h2>
-                <span className="text-sm font-medium text-indigo-600">${box.price}</span>
+              <div className="flex items-start gap-3 mb-2">
+                {logo && (
+                  <img src={logo} alt={`${box.name} logo`} width={40} height={40} className="w-10 h-10 rounded-lg border bg-white flex-shrink-0" loading="lazy" />
+                )}
+                <div className="flex-1 flex justify-between items-start">
+                  <h2 className="text-lg font-semibold text-gray-900">{box.name}</h2>
+                  <span className="text-sm font-medium text-indigo-600">${box.price}</span>
+                </div>
               </div>
               <div className="flex gap-2 mb-2">
                 <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full">
@@ -127,7 +135,19 @@ export default function Home() {
                 <span className="text-sm text-gray-500">{box.rating}/5</span>
               </div>
             </Link>
-          ))}
+          );})}
+        </div>
+
+        <div className="mt-12 border-t pt-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Browse by Category</h2>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <Link key={cat} href={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
+                className="px-4 py-2 bg-white border rounded-lg text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-300 transition">
+                Best {cat} Boxes →
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
