@@ -7,4 +7,5 @@ export interface Box {
   description: string;
   rating: number;
   url: string;
+  image?: string;
 }
